@@ -19,6 +19,7 @@ ENV PATH /opt/anaconda3/bin:$PATH
  
 # update pip and conda
 RUN pip install --upgrade pip
+RUN pip install geojson
 RUN conda install gdal
 
 WORKDIR /
