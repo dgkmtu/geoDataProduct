@@ -1,11 +1,16 @@
 	
 FROM ubuntu:latest
  
+ENV DEBIAN_FRONTEND=noninteractive
+
 # update
 RUN apt-get -y update && apt-get install -y \
 sudo \
 wget \
-vim
+vim \
+libopencv-dev \
+&& apt-get clean \
+&& rm -rf /var/lib/apt/lists/*
  
 #install anaconda3
 WORKDIR /opt
@@ -21,6 +26,7 @@ ENV PATH /opt/anaconda3/bin:$PATH
 RUN pip install --upgrade pip
 RUN pip install geojson
 RUN conda install gdal
+RUN pip install opencv-python
 
 WORKDIR /
 RUN mkdir /work
