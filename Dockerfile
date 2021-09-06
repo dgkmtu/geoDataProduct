@@ -23,10 +23,13 @@ rm -f Anaconda3-2019.10-Linux-x86_64.sh
 ENV PATH /opt/anaconda3/bin:$PATH
  
 # update pip and conda
-RUN pip install --upgrade pip
-RUN pip install geojson
 RUN conda install gdal
-RUN pip install opencv-python
+
+WORKDIR /usr/src/app
+RUN pip install --upgrade pip
+COPY requirements.txt ./
+RUN pip install -r requirements.txt
+
 
 WORKDIR /
 RUN mkdir /work
